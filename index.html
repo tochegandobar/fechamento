@@ -273,6 +273,7 @@
     <!-- BOTÃO ENVIAR -->
     <button onclick="enviarPedido()">📲 Enviar pedido via WhatsApp</button>
     <button id="btnFecharConta">Solicitar fechamento da conta (WhatsApp)</button>
+    <button onclick="imprimirPedido()" style="background-color: #555; margin-top: 10px;">🖨️ Imprimir Pedido</button>
   </div>
   
 <script>
@@ -849,6 +850,85 @@ function gerarMenu() {
 }
 
 gerarMenu();
+  
+    function imprimirPedido() {
+    if (carrinho.length === 0) {
+        alert("Não há itens no pedido para imprimir.");
+        return;
+    }
+
+    const nomeCliente = document.getElementById("nomeCliente").value.trim();
+    if (!nomeCliente) return alert("Digite o nome do cliente.");
+    const numMesa = document.getElementById("numMesa").value.trim();
+    if (!numMesa) return alert("Selecione a mesa.");
+
+    const dataHora = new Date().toLocaleString("pt-BR", {
+        dateStyle: "short",
+        timeStyle: "medium"
+    });
+
+    let txt = "";
+    txt += "   TÔ CHEGANDO BAR\n";
+    txt += "-----------------------------\n";
+    txt += `Cliente: ${nomeCliente}\n`;
+    txt += `Mesa: ${numMesa}\n`;
+    txt += `Data/Hora: ${dataHora}\n`;
+    txt += "-----------------------------\n\n";
+
+    let subtotal = 0;
+    let grupos = { Bebidas: "", Petiscos: "", Cigarros: "", Diversos: "", Bingo: "" };
+
+    carrinho.forEach(item => {
+        const total = item.preco * item.qtd;
+        subtotal += total;
+
+        const linha = `${item.qtd}x ${item.nome}${item.sabor ? ` (${item.sabor})` : ""} - R$ ${total.toFixed(2)}\n`;
+
+        if (["Cervejas","Sucos","Refrigerantes","Águas","Drinks","Energéticos","Vinhos","Destilados"].includes(item.categoria))
+            grupos.Bebidas += linha;
+        else if (["Espetinhos","Individuais","Porções"].includes(item.categoria))
+            grupos.Petiscos += linha;
+        else if (item.categoria === "Cigarros")
+            grupos.Cigarros += linha;
+        else if (item.categoria === "Bingo")
+            grupos.Bingo += linha;
+        else
+            grupos.Diversos += linha;
+    });
+
+    for (let sec in grupos) {
+        if (grupos[sec]) {
+            txt += `== ${sec} ==\n`;
+            txt += grupos[sec] + "\n";
+        }
+    }
+
+    const taxa = document.getElementById("gorjeta").checked ? subtotal * 0.1 : 0;
+    const totalFinal = subtotal + taxa;
+
+    txt += "-----------------------------\n";
+    txt += `Subtotal: R$ ${subtotal.toFixed(2)}\n`;
+    txt += `Taxa 10% opcional: R$ ${taxa.toFixed(2)}\n`;
+    txt += `TOTAL: R$ ${totalFinal.toFixed(2)}\n`;
+    txt += "-----------------------------\n\n";
+    txt += "Obrigado pela preferência!\n";
+
+    // Criar arquivo TXT
+    const blob = new Blob([txt], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    // Criar link de download/abertura
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "pedido.txt";
+    a.click();
+
+    // Alguns apps de impressão abrem automaticamente o arquivo TXT
+    setTimeout(() => {
+        URL.revokeObjectURL(url);
+    }, 2000);
+}
+
 </script>
 
   
