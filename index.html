@@ -281,6 +281,9 @@
    <button onclick="enviarPedido()">📲 Enviar pedido via WhatsApp</button>
     <button id="btnFecharConta">Solicitar fechamento da conta (WhatsApp)</button>
     <button onclick="imprimirPedido()" style="background-color: #555; margin-top: 10px;">🖨️ Imprimir Pedido</button>
+        <!--BOTÃO LIMPAR PEDIDO -->
+    <button onclick="limparPedido()" style="background:#444; margin-top:15px;">
+  🗑️ Limpar pedido
   </div>
   
 <script>
@@ -304,68 +307,140 @@ const numero = "552420198207";
   
 // ========== PRODUTOS ==========
 const produtos = [
-  //CERVEJAS
+   //CERVEJAS
 
-    { nome: "Amstel Litrão", preco: 13.50, categoria: "Cervejas", img: "./cervejas/logo_amstel.png" },
-    { nome: "Amstel 600ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_amstel.png" },
-    { nome: "Amstel Latão 473ml", preco: 8, categoria: "Cervejas", img: "./cervejas/logo_amstel.png" },
-   
-    { nome: "Antarctica Litrão", preco: 13.50, categoria: "Cervejas", img: "./cervejas/logo_antarctica.png" },
-    { nome: "Antarctica 600ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_antarctica.png" },
-    { nome: "Antarctica 300ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_antarctica.png" },
-    { nome: "Antarctica Latão 473ml", preco: 8, categoria: "Cervejas", img: "./cervejas/logo_antarctica.png" },
+        {
+    nome: "Amstel",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_amstel.png",
+    opcoes: {
+    "Litrão": 13.50,
+    "600ml": 10,
+    "Latão 473ml": 8}
+    },
     
-    { nome: "Bohemia 300ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_bohemia.jpg" },
-    { nome: "Bohemia Latão 473ml", preco: 8, categoria: "Cervejas", img: "./cervejas/logo_bohemia.jpg" },
+    {
+    nome: "Antarctica",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_antarctica.png",
+    opcoes: {
+    "Litrão": 13.50,
+    "600ml": 10,
+    "300ml": 5,
+    "Latão 473ml": 8}
+    },    
     
-    { nome: "Brahma Litrão", preco: 13.50, categoria: "Cervejas", img: "./cervejas/logo_brahma.png" },
-    { nome: "Brahma 600ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_brahma.png" },
-    { nome: "Brahma 300ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_brahma.png" },
-    { nome: "Brahma Latão 473ml", preco: 8, categoria: "Cervejas", img: "./cervejas/logo_brahma.png" },
-    
-    { nome: "Budweiser Litrão", preco: 13.50, categoria: "Cervejas", img: "./cervejas/logo_budweiser.png" },
-    { nome: "Budweiser 600ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_budweiser.png" },
-    { nome: "Budweiser 300ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_budweiser.png" },
-    { nome: "Budweiser Latão 473ml", preco: 8, categoria: "Cervejas", img: "./cervejas/logo_budweiser.png" },
-    { nome: "Budweiser Long Neck", preco: 9, categoria: "Cervejas", img: "./cervejas/logo_budweiser.png" }, 
-    
+    {
+    nome: "Bohemia",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_bohemia.jpg",
+    opcoes: {
+    "300ml": 5,
+    "Latão 473ml": 8}
+    },
+
+    {
+    nome: "Brahma",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_brahma.png",
+    opcoes: {
+    "Litrão": 13.50,
+    "600ml": 10,
+    "300ml": 5,
+    "Latão 473ml": 8}
+    },
+
+    {
+    nome: "Budweiser",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_budweiser.png",
+    opcoes: {
+    "Litrão": 13.50,
+    "600ml": 10,
+    "300ml": 5,
+    "Latão 473ml": 8,
+    "Long Neck": 9}
+    },
+
     { nome: "Caracu", preco: 8, categoria: "Cervejas", img: "./cervejas/logo_caracu.jpg" },
     
-    { nome: "Corona Latão 473ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_corona.png" },
-    { nome: "Corona Lonk Neck", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_corona.png" },
+    {
+    nome: "Corona",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_corona.png",
+    opcoes: {
+    "Long Neck": 10,
+    "Latão 473ml": 10}
+    },
+    
     { nome: "Corona Zero Alcool", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_corona_zero.png" },
-
-    
     { nome: "Heineken Zero Alcool", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_hein_zero.png" },
-    { nome: "Heineken 600ml", preco: 16, categoria: "Cervejas", img: "./cervejas/logo_heineken.png" },
-    { nome: "Heineken Latão 473ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_heineken.png" },
-    { nome: "Heineken Log Neck", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_heineken.png" },
     
-    { nome: "Imperio 300ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_imperio.jpg" },
-    { nome: "Imperio 600ml", preco: 11, categoria: "Cervejas", img: "./cervejas/logo_imperio.jpg" },
-    { nome: "Imperio Latão 473ml", preco: 7, categoria: "Cervejas", img: "./cervejas/logo_imperio.jpg" },
+    {
+    nome: "Heineken",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_heineken.png",
+    opcoes: {
+    "600ml": 16,
+    "Long Neck": 10,
+    "Latão 473ml": 10}
+    },
+    
+    {
+    nome: "Imperio",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_imperio.jpg",
+    opcoes: {
+    "600ml": 10,
+    "300ml": 5,
+    "Latão 473ml": 7}
+    },
 
-    
     { nome: "Itaipava 300ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_itaipava.png" },
     
-    { nome: "Lokal Litrão", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_lokal.png" },
-    { nome: "Lokal 600ml", preco: 7, categoria: "Cervejas", img: "./cervejas/logo_lokal.png" },
-    { nome: "Lokal Latão 473ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_lokal.png" },
+    {
+    nome: "Lokal",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_lokal.png",
+    opcoes: {
+    "Litrão": 10,
+    "600ml": 7,
+    "Latão 473ml": 5}
+    },
     
     { nome: "Malzbier", preco: 8, categoria: "Cervejas", img: "./cervejas/logo_brah_malz.jpg" },
-        
-    { nome: "Original Litrão", preco: 15, categoria: "Cervejas", img: "./cervejas/logo_ant_original.png" },
-    { nome: "Original 600ml", preco: 13, categoria: "Cervejas", img: "./cervejas/logo_ant_original.png" },
-    { nome: "Original 300ml", preco: 5, categoria: "Cervejas", img: "./cervejas/logo_ant_original.png" },
-    { nome: "Original Latão 473ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_ant_original.png" },
     
-    { nome: "Spaten 600ml", preco: 13, categoria: "Cervejas", img: "./cervejas/logo_spaten.jpg" },
-    { nome: "Spaten Long Neck", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_spaten.jpg" },
-    { nome: "Spaten Latão 473ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_spaten.jpg" },
-    
-    { nome: "Stella Artois 600ml", preco: 14, categoria: "Cervejas", img: "./cervejas/logo_stella.png" },
-    { nome: "Stella Artois Long Neck", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_stella.png" },
-    { nome: "Stella Artois Latão 473ml", preco: 10, categoria: "Cervejas", img: "./cervejas/logo_stella.png" },
+    {
+    nome: "Original",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_ant_original.png",
+    opcoes: {
+    "Litrão": 15,
+    "600ml": 13,
+    "300ml": 5,
+    "Latão 473ml": 10}
+    },
+
+    {
+    nome: "Spaten",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_spaten.jpg",
+    opcoes: {
+    "600ml": 13,
+    "Latão 473ml": 10,
+    "Long Neck": 10}
+    },
+
+    {
+    nome: "Stella Artois",
+    categoria: "Cervejas",
+    img: "./cervejas/logo_stella.png",
+    opcoes: {
+    "600ml": 14,
+    "Latão 473ml": 10,
+    "Long Neck": 10}
+    },
+
     
 //REFRIGERANTES, SUCOS E ÁGUAS
 
@@ -375,16 +450,23 @@ const produtos = [
     { nome: "Tônica 350ml", preco: 6, categoria: "Refrigerantes", img: "./refrigerantes/logo_tonica.jpeg" },
     
     { nome: "Refrigerante 2 litros (exceto Coca Cola)", preco: 12, categoria: "Refrigerantes", img: "./refrigerantes/refri_2_ambev.jpg", pedirSabor: true },
-    { nome: "Coca Cola 2 litros", preco: 15, categoria: "Refrigerantes", img: "./refrigerantes/logo_coca.jpeg" },
+    { nome: "Coca Cola 2 litros", preco: 15, categoria: "Refrigerantes", img: "./refrigerantes/logo_coca.jpeg", pedirSabor: true  },
     
     { nome: "Guaraviton", preco: 5, categoria: "Sucos", img: "./sucos/logo_guaraviton.png" },
     { nome: "H2OH 500ml", preco: 7, categoria: "Sucos", img: "./sucos/logo_h2oh.png" },
-    { nome: "Suco lata", preco: 8, categoria: "Sucos", img: "./sucos/logo_suco_lata.jpg", pedirSabor: true },
+    { nome: "Suco de Uva lata", preco: 8, categoria: "Sucos", img: "./sucos/logo_suco_lata.jpg" },
     { nome: "Refresco copo", preco: 2, categoria: "Sucos", img: "./sucos/logo_ativ.jpg", pedirSabor: true },
     
-    { nome: "Água sem gás 500ml", preco: 3.00, categoria: "Águas", img: "./aguas/agua.jpg" },
+    {
+    nome: "Água sem gás",
+    categoria: "Águas",
+    img: "./aguas/agua.jpg",
+    opcoes: {
+    "500ml": 3,
+    "1,5 litro": 5} 
+    },     
+     
     { nome: "Água com gás 500ml", preco: 4.00, categoria: "Águas", img: "./aguas/agua.jpg" },
-    { nome: "Água sem gás 1,5l", preco: 5.00, categoria: "Águas", img: "./aguas/agua.jpg" },
     { nome: "Água de Coco caixinha", preco: 5.00, categoria: "Águas", img: "./aguas/agua_coco.jpeg" },
     
 //DESTILADOS
@@ -396,14 +478,43 @@ const produtos = [
     { nome: "Canelinha - dose", preco: 5.00, categoria: "Destilados", img: "./sem_imagem/sem_foto.jpg" },
     { nome: "Catuaba Selvagem - dose", preco: 5.00, categoria: "Destilados", img: "./destilados/catuaba.png" },
     { nome: "Contini - dose", preco: 7.00, categoria: "Destilados", img: "./destilados/contini.png" },
-    { nome: "Domecq - tirinho", preco: 4.00, categoria: "Destilados", img: "./destilados/domecq.jpg" },
-    { nome: "Domecq - dose", preco: 7.00, categoria: "Destilados", img: "./destilados/domecq.jpg" },
-    { nome: "Dona Vânia - tirinho", preco: 5.00, categoria: "Destilados", img: "./destilados/vania.jpeg" },
-    { nome: "Dona Vânia - dose", preco: 9.00, categoria: "Destilados", img: "./destilados/vania.jpeg" },
-    { nome: "Dreher - tirinho", preco: 3.00, categoria: "Destilados", img: "./destilados/dreher.png" },
-    { nome: "Dreher - dose", preco: 5.00, categoria: "Destilados", img: "./destilados/dreher.png" }, 
-    { nome: "Fogo Paulista - tirinho", preco: 4.00, categoria: "Destilados", img: "./destilados/paulista.webp" },
-    { nome: "Fogo Paulista - dose", preco: 7.00, categoria: "Destilados", img: "./destilados/paulista.webp" },
+    
+    {
+    nome: "Domecq",
+    categoria: "Destilados",
+    img: "./destilados/domecq.jpg",
+    opcoes: {
+    "Tirinho": 4,
+    "Dose": 7} 
+    }, 
+    
+    {
+    nome: "Dona Vânia",
+    categoria: "Destilados",
+    img: "./destilados/vania.jpeg",
+    opcoes: {
+    "Tirinho": 5,
+    "Dose": 9} 
+    },  
+    
+    {
+    nome: "Dreher",
+    categoria: "Destilados",
+    img: "./destilados/dreher.png",
+    opcoes: {
+    "Tirinho": 3,
+    "Dose": 5} 
+    }, 
+    
+    {
+    nome: "Fogo Paulista",
+    categoria: "Destilados",
+    img: "./destilados/paulista.webp",
+    opcoes: {
+    "Tirinho": 4,
+    "Dose": 7} 
+    },           
+        
     { nome: "Gim - dose", preco: 10.00, categoria: "Destilados", img: "./sem_imagem/sem_foto.jpg" },
     { nome: "Jeropiga - dose", preco: 6.00, categoria: "Destilados", img: "./destilados/jeropiga.webp" },
     { nome: "Jurubeba - dose", preco: 6.00, categoria: "Destilados", img: "./destilados/jurubeba.jpeg" },
@@ -412,38 +523,105 @@ const produtos = [
     { nome: "Menta - dose", preco: 5.00, categoria: "Destilados", img: "./sem_imagem/sem_foto.jpg" },
     { nome: "Paratudo - dose", preco: 5.00, categoria: "Destilados", img: "./destilados/paratudo.webp" },
     { nome: "Rum Montilla - dose", preco: 7.00, categoria: "Destilados", img: "./destilados/rum.jpeg" },
-    { nome: "Seleta - tirinho", preco: 5.00, categoria: "Destilados", img: "./destilados/seleta.png" },
-    { nome: "Seleta - dose", preco: 9.00, categoria: "Destilados", img: "./destilados/seleta.png" },
-    { nome: "Smirnoff - tirinho", preco: 5.00, categoria: "Destilados", img: "./destilados/smirnoff.jpg" },
-    { nome: "Smirnoff - dose", preco: 10.00, categoria: "Destilados", img: "./destilados/smirnoff.jpg" },
-    { nome: "Steinhager - tirinho", preco: 5.00, categoria: "Destilados", img: "./destilados/stein.jpg" },
-    { nome: "Steinhager - dose", preco: 10.00, categoria: "Destilados", img: "./destilados/stein.jpg" },
+    
+    {
+    nome: "Seleta",
+    categoria: "Destilados",
+    img: "./destilados/seleta.png",
+    opcoes: {
+    "Tirinho": 5,
+    "Dose": 9} 
+    }, 
+    
+    {
+    nome: "Smirnoff",
+    categoria: "Destilados",
+    img: "./destilados/smirnoff.jpg",
+    opcoes: {
+    "Tirinho": 5,
+    "Dose": 10} 
+    },           
+    
+    {
+    nome: "Steinhager",
+    categoria: "Destilados",
+    img: "./destilados/stein.jpg",
+    opcoes: {
+    "Tirinho": 5,
+    "Dose": 10} 
+    },      
+
+
     { nome: "Tequila - dose", preco: 15.00, categoria: "Destilados", img: "./sem_imagem/sem_foto.jpg" },
     { nome: "Trassado - dose", preco: 5.00, categoria: "Destilados", img: "./sem_imagem/sem_foto.jpg", pedirSabor: true  },
     { nome: "Velho Barreiro - dose", preco: 5.00, categoria: "Destilados", img: "./destilados/velho.webp" },
-    { nome: "Whisky Ballantines (8 anos) - tirinho", preco: 10.00, categoria: "Destilados", img: "./destilados/ball.jpg" },
-    { nome: "Whisky Ballantines (8 anos) - dose", preco: 18.00, categoria: "Destilados", img: "./destilados/ball.jpg" },
-    { nome: "Whisky Red Label (8 anos) - tirinho", preco: 10.00, categoria: "Destilados", img: "./destilados/red.webp" },
-    { nome: "Whisky Red Label (8 anos) - dose", preco: 18.00, categoria: "Destilados", img: "./destilados/red.webp" },
-    { nome: "Whisky White Horse (8 anos) - tirinho", preco: 10.00, categoria: "Destilados", img: "./destilados/white.webp" },
-    { nome: "Whisky White Horse (8 anos) - dose", preco: 18.00, categoria: "Destilados", img: "./destilados/white.webp" },
-    { nome: "Ypioca - tirinho", preco: 3.00, categoria: "Destilados", img: "./destilados/ypioca.webp" },
-    { nome: "Ypioca - dose", preco: 6.00, categoria: "Destilados", img: "./destilados/ypioca.webp" },
+
+    {
+    nome: "Whisky Ballantines (8 anos)",
+    categoria: "Destilados",
+    img: "./destilados/ball.jpg",
+    opcoes: {
+    "Tirinho": 10,
+    "Dose": 18} 
+    },
+    
+    {
+    nome: "Whisky Red Label (8 anos)",
+    categoria: "Destilados",
+    img: "./destilados/red.webp",
+    opcoes: {
+    "Tirinho": 10,
+    "Dose": 18} 
+    },
+    
+    {
+    nome: "Whisky White Horse (8 anos)",
+    categoria: "Destilados",
+    img: "./destilados/white.webp",
+    opcoes: {
+    "Tirinho": 10,
+    "Dose": 18} 
+    },
+    
+    {
+    nome: "Ypioca",
+    categoria: "Destilados",
+    img: "./destilados/ypioca.webp",
+    opcoes: {
+    "Tirinho": 3,
+    "Dose": 6} 
+    },                
+    
     
 //ENERGÉTICOS
     { nome: "Red Bull Lata", preco: 13.00, categoria: "Energéticos", img: "./energeticos/logo_redbull.png" },
-    { nome: "TNT Lata", preco: 10.00, categoria: "Energéticos", img: "./energeticos/logo_tnt.jpg" },
-    { nome: "TNT Latão", preco: 13.00, categoria: "Energéticos", img: "./energeticos/logo_tnt.jpg" },
+    
+    {
+    nome: "TNT",
+    categoria: "Energéticos",
+    img: "./energeticos/logo_tnt.jpg",
+    opcoes: {
+    "Lata": 10,
+    "Latão": 13} 
+    },     
+
     { nome: "2 litros", preco: 15.00, categoria: "Energéticos", img: "./sem_imagem/sem_foto.jpg" },
 
 //VINHOS
-    { nome: "Cantina da Serra 880ml", preco: 12, categoria: "Vinhos", img: "./vinhos/cantina.png" },
-    { nome: "Cantina da Serra 1,5 l", preco: 20, categoria: "Vinhos", img: "./vinhos/cantina.png" },
     { nome: "Copo (seco ou suave)", preco: 8.00, categoria: "Vinhos", img: "./vinhos/americano.webp", pedirSabor: true },
     { nome: "Taça (seco ou suave)", preco: 12.00, categoria: "Vinhos", img: "./vinhos/taca.webp", pedirSabor: true },
-    { nome: "Garrafa Galiotto 1 litro Seco", preco: 40.00, categoria: "Vinhos", img: "./vinhos/gali_seco.png" },
-    { nome: "Garrafa Galiotto 1 litro Suave", preco: 40.00, categoria: "Vinhos", img: "./vinhos/gali_suave.png" },
-    { nome: "Garrafa Vinho Reserva 750ml (seco ou suave)", preco: 50.00, categoria: "Vinhos", img: "./sem_imagem/sem_foto.jpg", pedirSabor: true },
+   
+    {
+    nome: "Cantina da Serra",
+    categoria: "Vinhos",
+    img: "./vinhos/cantina.png",
+    opcoes: {
+    "880ml": 12,
+    "1,5 litro": 20} 
+    }, 
+    
+    { nome: "Galiotto 1 litro", preco: 40.00, categoria: "Vinhos", img: "./vinhos/gali_suave.png", pedirSabor: true },
+    { nome: "Garrafa Vinho Reserva 750ml", preco: 50.00, categoria: "Vinhos", img: "./sem_imagem/sem_foto.jpg", pedirSabor: true },
   
 
 //DRINKS
@@ -461,40 +639,135 @@ const produtos = [
     
     
 //PORÇÕES     
-    { nome: "Adicional de Cheedar ou Catupiry", preco: 5, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg", pedirSabor: true },
+    { nome: "Adicional de Bacon ou Cheedar ou Catupiry", preco: 5, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg", pedirSabor: true },
     { nome: "Azeitona", preco: 12, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
 
+    
+    { 
+    nome: "Aipim Frito",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 19.90,
+    "Grande": 29.90}
+    },
+    
+    { 
+    nome: "Aipim com Calabresa",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 25.90,
+    "Grande": 43.90}
+    },
 
-    { nome: "Aipim Frito - Pequena", preco: 19.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Aipim Frito - Grande", preco: 29.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Aipim com Calabresa - Pequena", preco: 25.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Aipim com Calabresa - Grande", preco: 43.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Aipim com Carne Seca - Pequena", preco: 29.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Aipim com Carne Seca - Grande", preco: 44.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita - Pequena", preco: 15, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita - Grande", preco: 29.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Bacon e Cheedar - Pequena", preco: 24.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Bacon e Cheedar - Grande", preco: 39.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Calabresa - Pequena", preco: 29.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Calabresa - Grande", preco: 44.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Carne Seca - Pequena", preco: 29.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Carne Seca - Grande", preco: 44.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Cheedar ou Catupiry - Pequena", preco: 19.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Batata Frita com Cheedar ou Catupiry - Grande", preco: 34.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
+    { 
+    nome: "Aipim com Carne Seca",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 29.90,
+    "Grande": 44.90}
+    },
     
+    {
+    nome: "Batata Frita",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 15.00,
+    "Grande": 29.90}
+    },  
     
-    { nome: "Alcatra acebolada ou com alho - Pequena", preco: 43.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Alcatra acebolada ou com alho - Grande", preco: 69.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Calabresa acebolada - Pequena", preco: 24.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Calabresa acebolada - Grande", preco: 39.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Coração acebolado - Pequena", preco: 35.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Coração acebolado - Grande", preco: 63.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Filé de frango acebolado ou com alho - Pequena", preco: 28.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Filé de frango acebolado ou com alho - Grande", preco: 55.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Linguiça mineira acebolada - Pequena", preco: 24.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Linguiça mineira acebolada - Grande", preco: 44.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Mista (carne bovina, linguiça, frango e batata) - Pequena", preco: 53.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Mista (carne bovina, linguiça, frango e batata) - Grande", preco: 73.90, categoria: "Porções", img: "./sem_imagem/sem_foto.jpg" },
+    {
+    nome: "Batata Frita com Bacon e Cheedar",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 24.90,
+    "Grande": 39.90}
+    },
+    
+    {
+    nome: "Batata Frita com Calabresa",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 29.90,
+    "Grande": 44.90}
+    },
+    
+    {
+    nome: "Batata Frita com Carne Seca",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 29.90,
+    "Grande": 44.90}
+    },   
+    
+    {
+    nome: "Batata Frita com Cheedar ou Catupiry",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 19.90,
+    "Grande": 34.90}
+    },
+                       
+    {
+    nome: "Alcatra acebolada ou com alho",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 43.90,
+    "Grande": 69.90}
+    },
+    
+    {
+    nome: "Calabresa acebolada",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 24.90,
+    "Grande": 39.90}
+    },
+    
+    {
+    nome: "Coração acebolado",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 35.90,
+    "Grande": 63.90}
+    },
+    
+    {
+    nome: "Filé de frango acebolado ou com alho",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 28.90,
+    "Grande": 55.90}
+    },
+    
+    {
+    nome: "Linguiça mineira acebolada",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 24.90,
+    "Grande": 44.90}
+    },     
+    
+    {
+    nome: "Mista (carne bovina, linguiça, frango e batata)",
+    categoria: "Porções",
+    img: "./sem_imagem/sem_foto.jpg",
+    opcoes: {
+    "Pequena": 53.90,
+    "Grande": 73.90}
+    },
     
     
 //ESPETINHOS
@@ -506,8 +779,7 @@ const produtos = [
     { nome: "Salsichão", preco: 9, categoria: "Espetinhos", img: "./espetinhos/salsichao.png" },
     
 //INDIVIDUAIS
-    { nome: "Adicional de Bacon", preco: 5, categoria: "Petiscos", img: "./sem_imagem/sem_foto.jpg" },
-    { nome: "Adicional de Cheedar", preco: 5, categoria: "Petiscos", img: "./sem_imagem/sem_foto.jpg" },
+
     { nome: "Caldos", preco: 13.90, categoria: "Individuais", img: "./individuais/caldos.jpg", pedirSabor: true  },                 
     { nome: "Empadinha", preco: 5, categoria: "Individuais", img: "./individuais/empada.jpeg", pedirSabor: true },
 
@@ -518,7 +790,6 @@ const produtos = [
     { nome: "Salgadinho - unidade", preco: 1, categoria: "Individuais", img: "./sem_imagem/sem_foto.jpg", pedirSabor: true },
     { nome: "Tapa na Cara", preco: 6, categoria: "Individuais", img: "./sem_imagem/sem_foto.jpg" },
   
-
     { nome: "Queijo Mussarela em Conserva", preco: 4, categoria: "Individuais", img: "./sem_imagem/sem_foto.jpg" },
     { nome: "Queijo Provolone em Conserva", preco: 5, categoria: "Individuais", img: "./sem_imagem/sem_foto.jpg" },            
 
@@ -557,37 +828,52 @@ const produtos = [
     
 //CIGARROS    
     { nome: "Black", preco: 25, categoria: "Cigarros", img: "./cigarros/black.jpg" },
-    { nome: "Camel (Amarelo ou Azul)", preco: 8.75, categoria: "Cigarros", img: "./cigarros/camel.jpg", pedirSabor: true },
-    { nome: "Camel Kretek (Berry ou Menthol", preco: 14.75, categoria: "Cigarros", img: "./cigarros/camel_kretek.jpg", pedirSabor: true },
+    { nome: "Camel", preco: 8.75, categoria: "Cigarros", img: "./cigarros/camel.jpg", pedirSabor: true },
+    { nome: "Camel Kretek", preco: 14.75, categoria: "Cigarros", img: "./cigarros/camel_kretek.jpg", pedirSabor: true },
     { nome: "Cigarro de Palha Maço", preco: 15, categoria: "Cigarros", img: "./cigarros/palha.jpg" },
     { nome: "Cigarro Egipt", preco: 6, categoria: "Cigarros", img: "./cigarros/egipt.jpg" },
     { nome: "Dunhill Double Refresh", preco: 14, categoria: "Cigarros", img: "./cigarros/dunhill_double_refresh.jpg" },
-    { nome: "Dunhill (Vermelho ou Azul)", preco: 14, categoria: "Cigarros", img: "./cigarros/dunhill.jpg", pedirSabor: true },
-    { nome: "Dunhill On (Vermelho ou Azul)", preco: 11.25, categoria: "Cigarros", img: "./cigarros/dunhill_on.jpg", pedirSabor: true },
+    { nome: "Dunhill", preco: 14, categoria: "Cigarros", img: "./cigarros/dunhill.jpg", pedirSabor: true },
+    { nome: "Dunhill On", preco: 11.25, categoria: "Cigarros", img: "./cigarros/dunhill_on.jpg", pedirSabor: true },
     { nome: "Gudan Garan", preco: 30, categoria: "Cigarros", img: "./cigarros/gudang.webp" },
-    { nome: "Kent (Vermelho, Azul ou Prata)", preco: 11.50, categoria: "Cigarros", img: "./cigarros/kent.jpg", pedirSabor: true },
-    { nome: "Luck Strike (Vermelho ou Azul)", preco: 11.25, categoria: "Cigarros", img: "./cigarros/lucky_orig.jpg", pedirSabor: true },
+    { nome: "Kent", preco: 11.50, categoria: "Cigarros", img: "./cigarros/kent.jpg", pedirSabor: true },
+    { nome: "Luck Strike", preco: 11.25, categoria: "Cigarros", img: "./cigarros/lucky_orig.jpg", pedirSabor: true },
     { nome: "Luck Strike Double", preco: 11.75, categoria: "Cigarros", img: "./cigarros/lucky_doub.jpg" },
-    { nome: "Luck Strike Fresh (Verde ou Azul)", preco: 11.50, categoria: "Cigarros", img: "./cigarros/lucky_fresh.jpg", pedirSabor: true  },
-    { nome: "Luck Strike Patterson (Vermelho ou Azul)", preco: 7.50, categoria: "Cigarros", img: "./cigarros/lucky_pat.jpg", pedirSabor: true  },
-    { nome: "Marlboro (Red ou Gold)", preco: 12.50, categoria: "Cigarros", img: "./cigarros/marlboro.jpg", pedirSabor: true  },
-    { nome: "Marlboro Vista (Double Fusion ou Purple)", preco: 11.75, categoria: "Cigarros", img: "./cigarros/marb_vista.jpg", pedirSabor: true },
+    { nome: "Luck Strike Fresh", preco: 11.50, categoria: "Cigarros", img: "./cigarros/lucky_fresh.jpg", pedirSabor: true  },
+    { nome: "Luck Strike Patterson", preco: 7.50, categoria: "Cigarros", img: "./cigarros/lucky_pat.jpg", pedirSabor: true  },
+    { nome: "Marlboro", preco: 12.50, categoria: "Cigarros", img: "./cigarros/marlboro.jpg", pedirSabor: true  },
+    { nome: "Marlboro Vista", preco: 11.75, categoria: "Cigarros", img: "./cigarros/marb_vista.jpg", pedirSabor: true },
     { nome: "Marlboro Ice Burst", preco: 14, categoria: "Cigarros", img: "./cigarros/marb_ice.jpg" },
-    { nome: "Marlboro Selection (Red, gold ou blue)", preco: 7.75, categoria: "Cigarros", img: "./cigarros/malrb_selec.jpg", pedirSabor: true  },
-    { nome: "Rothmans (Azul ou Vermelho)", preco: 9.25, categoria: "Cigarros", img: "./cigarros/rothmans.jpg", pedirSabor: true  },
-    { nome: "Rothmans Global (Azul ou Vermelho)", preco: 7.50, categoria: "Cigarros", img: "./cigarros/roth_glob.jpg", pedirSabor: true  },
-    { nome: "Sampoerna (Menta ou Cravo)", preco: 16, categoria: "Cigarros", img: "./cigarros/sampo.jpg", pedirSabor: true  },
-    { nome: "Seda - caixinha", preco: 5, categoria: "Cigarros", img: "./cigarros/seda.jpg" },
-    { nome: "Seda - unidade", preco: 1, categoria: "Cigarros", img: "./cigarros/seda.jpg" },
-    { nome: "Tabaco", preco: 17.90, categoria: "cigarros", img: "./cigarros/tabaco.jpg" },
-    { nome: "Winston (Azul ou Vermelho)", preco: 7.75, categoria: "Cigarros", img: "./cigarros/winston.jpg", pedirSabor: true  },
+    { nome: "Marlboro Selection", preco: 7.75, categoria: "Cigarros", img: "./cigarros/malrb_selec.jpg", pedirSabor: true  },
+    { nome: "Rothmans", preco: 9.25, categoria: "Cigarros", img: "./cigarros/rothmans.jpg", pedirSabor: true  },
+    { nome: "Rothmans Global", preco: 7.50, categoria: "Cigarros", img: "./cigarros/roth_glob.jpg", pedirSabor: true  },
+    { nome: "Sampoerna", preco: 16, categoria: "Cigarros", img: "./cigarros/sampo.jpg", pedirSabor: true  },
+    
+    {
+    nome: "Seda",
+    categoria: "Cigarros",
+    img: "./cigarros/seda.jpg",
+    opcoes: {
+    "Unidade": 1,
+    "Caixinha": 5}
+    },    
+ 
+    { nome: "Tabaco", preco: 17.90, categoria: "Cigarros", img: "./cigarros/tabaco.jpg" },
+    { nome: "Winston", preco: 7.75, categoria: "Cigarros", img: "./cigarros/winston.jpg", pedirSabor: true  },
     
 //ISQUEIROS
     { nome: "Fósforo", preco: 1, categoria: "Cigarros", img: "./cigarros/fosforo.png"  },
-    { nome: "Isqueiro Chama", preco: 4, categoria: "Cigarros", img: "./cigarros/chama.jpeg"  },
-    { nome: "Isqueiro Bic Mini", preco: 6, categoria: "Cigarros", img: "./cigarros/mini.webp"  },
-    { nome: "Isqueiro Bic Maxi", preco: 8, categoria: "Cigarros", img: "./cigarros/maxi.jpg"  },                
     
+    {
+    nome: "Isqueiro",
+    categoria: "Cigarros",
+    img: "./cigarros/chama.jpeg",
+    opcoes: {
+    "Chama": 4,
+    "Bic Mini": 6,
+    "Bic Maxi": 8}
+    },
+   
 //BINGO
     { nome: "Bingo - R$ 1,00", preco: 1, categoria: "Bingo", img: "./bingo/bingo.webp" },
     { nome: "Bingo - R$ 1,50", preco: 1.50, categoria: "Bingo", img: "./bingo/bingo.webp" },
@@ -595,11 +881,27 @@ const produtos = [
     { nome: "Bingo - R$ 3,00", preco: 3, categoria: "Bingo", img: "./bingo/bingo.webp" },
     { nome: "Bingo - R$ 4,00", preco: 4, categoria: "Bingo", img: "./bingo/bingo.webp" },
 
-
-
 ];
 
+
 let carrinho = [];
+
+//FUNÇÃO QUE OBRIGA USUÁRIO A ESCOLHER ITEM ANTES DE CLICAR EM + OU -
+function validarEscolhaObrigatoria(produto) {
+  const idSabor = `sabor-${produto.nome.replace(/\s/g, '')}`;
+  const campoSabor = document.getElementById(idSabor);
+
+  // Produto possui sabores ou tamanhos?
+  const exigeEscolha = produto.pedirSabor || produto.opcoes;
+
+  if (exigeEscolha) {
+    if (!campoSabor || !campoSabor.value.trim()) {
+      alert("Por favor, selecione a opção antes de adicionar ou remover este item!");
+      return false;
+    }
+  }
+  return true;
+}
 
 // ========== FUNÇÕES AUXILIARES ==========
 
@@ -611,6 +913,7 @@ function gerarChave(produto, sabor = "") {
 function adicionar(nomeProduto) {
   const produto = produtos.find(p => p.nome === nomeProduto);
   if (!produto) return;
+  if (!validarEscolhaObrigatoria(produto)) return;
 
   const idQtd = `qtd-${produto.nome.replace(/\s/g, '')}`;
   const idSabor = `sabor-${produto.nome.replace(/\s/g, '')}`;
@@ -626,7 +929,9 @@ function adicionar(nomeProduto) {
     carrinho.push({
       chave,
       nome: produto.nome,
-      preco: produto.preco,
+      //preco: produto.preco,
+      preco: produto.opcoes ? produto.opcoes[saborEscolhido] : produto.preco,
+
       categoria: produto.categoria,
       sabor: saborEscolhido,
       qtd: 1
@@ -641,6 +946,7 @@ function adicionar(nomeProduto) {
 function remover(nomeProduto) {
   const produto = produtos.find(p => p.nome === nomeProduto);
   if (!produto) return;
+  if (!validarEscolhaObrigatoria(produto)) return;
 
   const idSabor = `sabor-${produto.nome.replace(/\s/g, '')}`;
   const campoSabor = document.getElementById(idSabor);
@@ -725,6 +1031,24 @@ function atualizarResumo() {
   taxaEl.textContent = taxa.toFixed(2);
   totalFinalEl.textContent = totalFinal.toFixed(2);
 }
+//LIMPAR, ZERAR PEDIDO
+function limparPedido() {
+  if (!confirm("Tem certeza que deseja limpar todo o pedido?")) return;
+
+  carrinho = []; // limpa todos os itens do carrinho
+  atualizarResumo(); // esconde o resumo
+  atualizarQuantidades(); // zera os contadores visuais
+
+  // limpa campos de seleção de sabor/tamanho
+  produtos.forEach(p => {
+    const idSabor = `sabor-${p.nome.replace(/\s/g, '')}`;
+    const campoSabor = document.getElementById(idSabor);
+    if (campoSabor) campoSabor.value = "";
+  });
+
+  alert("Pedido zerado com sucesso!");
+}
+
 
 // ========== ENVIAR PEDIDO ==========
 function enviarPedido() {
@@ -773,6 +1097,54 @@ function enviarPedido() {
   window.open(`https://wa.me/${numero}?text=${mensagem}`, "_blank");
 }
 
+// LISTA DE SABORES POR PRODUTO
+const opcoesDeSabor = {
+//REFRIGERANTES SUCOS E AGUAS
+  "Refrigerante 200ml": ["Coca Cola", "Coca Zero", "Guaraná", "Pepsi", "Outro"],
+  "Refrigerante 350ml": ["Coca Cola", "Coca Zero", "Guaraná", "Pepsi", "Outro"],
+  "Refrigerante 600ml": ["Coca Cola", "Coca Zero"],
+  "Refrigerante 2 litros (exceto Coca Cola)": ["Guaraná", "Guaraná Zero", "Pepsi", "Mineirinho", "Soda", "Fanta Laranja", "Fanta Uva"],
+  "Refresco copo": ["Guaraná", "Guaraná com Açaí", "Laranja com Acerola"],  
+  "Coca Cola 2 litros": ["Comum", "Zero"],
+  
+//VINHOS
+  "Copo de vinho": ["Seco", "Suave"],
+  "Taça de vinho": ["Seco", "Suave"],
+  "Garrafa Vinho Reserva 750ml": ["Seco", "Suave"],
+
+//INDIVIDUAIS
+  "Caldos": ["Ervilha", "Abobora", "Feijao", "Canjiquinha"],
+  "Salgadinho - unidade": ["Carne", "Queijo", "Croquete", "Coxinha"],
+  
+//DIVERSOS
+  "Biscoito Recheado": ["Chocolate", "Morango", "Limao", "Brigadeiro"],
+  "Batata Gulao": ["Tradicional", "Churrasco", "Cebola"],
+  "Trident": ["Menta", "Hortelã", "Melancia", "Morango", "Outro - consultar"],
+  
+//CIGARROS
+  "Camel": ["Amarelo", "Azul"],
+  "Camel Kretek": ["Berry", "Menthol"],
+  "Dunhill": ["Vermelho", "Azul"],  
+  "Dunhill On": ["Vermelho", "Azul"],
+  "Kent": ["Vermelho", "Azul", "Prata"],
+  "Luck Strike": ["Vermelho", "Azul"],
+  "Luck Strike Fresh": ["Verde", "Azul"],
+  "Luck Strike Patterson": ["Vermelho", "Azul"],
+  "Marlboro": ["Red", "Gold"],
+  "Marlboro Vista": ["Double Fusion", "Purple"],
+  "Marlboro Selection": ["Red", "Gold", "Blue"],
+  "Rothmans": ["Vermelho", "Azul"],
+  "Rothmans Global": ["Azul", "Azul"],
+  "Sampoerna": ["Menta", "Cravo"],
+  "Winston": ["Amarelo", "Azul"],
+  
+  
+  "Adicional Bacon ou Cheedar ou Catupiry": ["Bacon", "Cheedar", "Catupiry"],
+  // Você pode adicionar mais aqui:
+  // "Produto X": ["Sabor 1", "Sabor 2"]
+};
+
+
 // ========== GERAR MENU ==========
 function gerarMenu() {
   const categorias = [
@@ -810,8 +1182,28 @@ function gerarMenu() {
           <img src="${p.img}" alt="${p.nome}">
           <div class="item-info">
             <div style="font-weight:bold;">${p.nome}</div>
-            <div style="color:#ffcc00;">R$ ${p.preco.toFixed(2)}</div>
-            ${p.pedirSabor ? `<input type="text" id="${idSabor}" placeholder="Digite a opção escolhida" style="margin-top:6px;">` : ""}
+            ${p.opcoes
+  ? `<div style="color:#ffcc00;">Selecione o tamanho</div>`
+  : `<div style="color:#ffcc00;">R$ ${p.preco.toFixed(2)}</div>`
+}
+
+${p.pedirSabor ? (
+  opcoesDeSabor[p.nome]
+    ? `<select id="${idSabor}" class="campo-sabor">
+         <option value="" disabled selected>Selecione...</option>
+         ${opcoesDeSabor[p.nome].map(s => `<option value="${s}">${s}</option>`).join("")}
+       </select>`
+    : `<input type="text" id="${idSabor}" class="campo-sabor" placeholder="Digite a opção escolhida">`
+) : ""}
+
+${p.opcoes ? `
+<select id="${idSabor}" class="campo-sabor">
+  <option value="" disabled selected>Escolha o tamanho...</option>
+  ${Object.keys(p.opcoes).map(tam => `<option value="${tam}">${tam} - R$ ${p.opcoes[tam].toFixed(2)}</option>`).join("")}
+</select>
+` : ""}
+
+
           </div>
           <div class="item-controles">
             <button style="background:#ff0000;" onclick="remover('${p.nome}')">−</button>
